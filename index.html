@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>ServiTec | Reparación de Electrónicos</title>
+  <!-- Font Awesome 6 (Free Icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Poppins + Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fc;
+      color: #1e2a3e;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #e2e8f0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 8px;
+    }
+
+    /* HEADER / NAVIGATION */
+    .navbar {
+      background: #ffffff;
+      backdrop-filter: blur(0px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 0.9rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .logo span {
+      font-size: 0.8rem;
+      color: #4b5563;
+      display: block;
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+    }
+    .nav-links li a {
+      text-decoration: none;
+      padding: 0.6rem 1.1rem;
+      font-weight: 600;
+      color: #1f2937;
+      border-radius: 40px;
+      transition: all 0.2s ease;
+      display: inline-block;
+      font-size: 0.95rem;
+    }
+    .nav-links li a:hover, .nav-links li a.active {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 4px 10px rgba(37,99,235,0.2);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #1e293b;
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .active-section {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: #3b82f6;
+      border-radius: 4px;
+    }
+
+    /* HERO - INICIO */
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .hero-text {
+      flex: 1.2;
+    }
+    .hero-text h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.2;
+      background: linear-gradient(to right, #1e293b, #2563eb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-text p {
+      margin: 1.5rem 0;
+      color: #334155;
+      font-size: 1.1rem;
+    }
+    .btn-primary {
+      background: #2563eb;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 32px;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+      object-fit: cover;
+      width: 100%;
+      height: auto;
+    }
+
+    /* lista de servicios cards */
+    .services-list {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      justify-content: center;
+    }
+    .service-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 28px;
+      flex: 1 1 200px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      transition: all 0.2s;
+      border: 1px solid #eef2ff;
+    }
+    .service-card i {
+      font-size: 2.5rem;
+      color: #2563eb;
+      margin-bottom: 0.8rem;
+    }
+    .service-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .service-card p {
+      color: #4b5563;
+      font-size: 0.85rem;
+    }
+
+    /* info grid */
+    .info-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+    }
+    .info-text {
+      flex: 2;
+    }
+    .info-text h3 {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+    }
+    .badge {
+      background: #e0f2fe;
+      color: #0369a1;
+      border-radius: 40px;
+      padding: 0.2rem 1rem;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    /* contacto form */
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+    }
+    .form-container {
+      flex: 1.2;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      font-family: 'Inter', sans-serif;
+      transition: 0.2s;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+    }
+    .contact-info {
+      flex: 0.8;
+      background: #f8fafc;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+    }
+    .contact-info i {
+      width: 32px;
+      color: #2563eb;
+    }
+
+    /* ubicacion */
+    .map-placeholder {
+      background: #e2e8f0;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .address-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* reservas (citas) */
+    .booking-card {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+    }
+    .booking-card h3 {
+      margin-bottom: 1rem;
+    }
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #ffffff;
+      border-top: 1px solid #eef2ff;
+      margin-top: 2rem;
+      color: #4b5563;
+    }
+
+    @media (max-width: 850px) {
+      .navbar {
+        flex-direction: row;
+        padding: 1rem;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-top: 1rem;
+        background: white;
+        padding: 1rem;
+        border-radius: 28px;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .nav-links li a {
+        display: block;
+        text-align: center;
+      }
+      .hero-grid {
+        flex-direction: column;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .hero-text h2 {
+        font-size: 2rem;
+      }
+    }
+    @media (max-width: 550px) {
+      .section {
+        padding: 2rem 1rem;
+      }
+    }
+    button {
+      background: #2563eb;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+    }
+    .success-msg {
+      color: #16a34a;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <div class="logo">
+      <h1>ServiTec <span>⚡ reparación experta</span></h1>
+    </div>
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="nav-list">
+      <li><a href="#" data-section="inicio" class="nav-link active">Inicio</a></li>
+      <li><a href="#" data-section="informacion" class="nav-link">Información</a></li>
+      <li><a href="#" data-section="contacto" class="nav-link">Contacto</a></li>
+      <li><a href="#" data-section="ubicacion" class="nav-link">Ubicación</a></li>
+      <li><a href="#" data-section="reservas" class="nav-link">Reservas</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- SECCION INICIO -->
+  <section id="inicio" class="section active-section">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h2>Reparaciones electrónicas <br> con garantía y rapidez</h2>
+        <p>En ServiTec devolvemos la vida a tus dispositivos: televisores, laptops, consolas, equipos de audio y más. Más de 5 años de experiencia, repuestos originales y servicio express.</p>
+        <button class="btn-primary" id="btnReservarDesdeInicio">📅 Reserva tu cita ahora</button>
+      </div>
+      <div class="hero-image">
+        <img src="WhatsApp Image 2026-05-13 at 2.19.05 PM.jpeg" alt="Taller de reparación electrónica" style="background:#eef2ff;">
+      </div>
+    </div>
+    <div style="margin-top: 3rem;">
+      <h3 class="section-title">📺 Nuestros servicios estrella</h3>
+      <div class="services-list">
+        <!-- Servicio: Televisores (reemplaza smartphones) -->
+        <div class="service-card"><i class="fas fa-tv"></i><h3>Televisores</h3><p>LCD, LED, OLED, Smart TV. Reparación de placas, fuentes, pantalla y backlight.</p></div>
+        <div class="service-card"><i class="fas fa-laptop"></i><h3>Laptops / PC</h3><p>Mantenimiento, SSD, teclados, placa madre, limpieza profunda.</p></div>
+        <div class="service-card"><i class="fas fa-tablet-alt"></i><h3>Tablets</h3><p>Reparación de módulos, conectores y software.</p></div>
+        <div class="service-card"><i class="fas fa-gamepad"></i><h3>Consolas</h3><p>PlayStation, Xbox, Nintendo: limpieza y reparación de fallos.</p></div>
+        <div class="service-card"><i class="fas fa-headphones"></i><h3>Audio & Radios</h3><p>Equipos de sonido, amplificadores, radios antiguas y modernas.</p></div>
+        <div class="service-card"><i class="fas fa-microchip"></i><h3>Electrónica general</h3><p>Fuentes de poder, cargadores, electrodomésticos pequeños y más.</p></div>
+      </div>
+      <!-- Segunda línea de servicios para mostrar variedad -->
+      <div style="margin-top: 1.5rem; text-align: center;">
+        <p style="color:#2563eb; font-weight:500;"><i class="fas fa-wrench"></i> También reparamos: proyectores, monitores, equipos de DJ, instrumentos musicales electrónicos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCION INFORMACION -->
+  <section id="informacion" class="section">
+    <h2 class="section-title">🔧 Información técnica</h2>
+    <div class="info-grid">
+      <div class="info-text">
+        <span class="badge">📌 ¿Por qué elegirnos?</span>
+        <h3>Diagnóstico sin costo *</h3>
+        <p>En ServiTec realizamos un diagnóstico detallado antes de cualquier reparación. Te explicamos cada paso y el presupuesto es transparente. Trabajamos con componentes originales y ofrecemos garantía de 90 días en todas nuestras reparaciones.</p>
+        <h3>⚙️ Proceso profesional</h3>
+        <p>1. Recepción y diagnóstico.<br>2. Presupuesto autorizado.<br>3. Reparación con tecnología de punta.<br>4. Control de calidad y entrega.</p>
+        <h3>🕒 Horarios</h3>
+        <p>Lunes a Viernes: 9:00 - 19:00 | Sábados: 10:00 - 15:00</p>
+        <h3>🏆 Especialistas en TV y Audio</h3>
+        <p>Contamos con equipos de prueba para televisores de última generación y radios clásicas. Reparación de placas a nivel de componentes.</p>
+      </div>
+      <div style="flex:1; background: #eef2ff; border-radius: 24px; padding: 1rem; display: flex; align-items: center; justify-content: center;">
+        <div class="hero-image">
+        <img src="imagen.jpg" alt="Taller de reparación electrónica" style="background:#eef2ff;">
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCION CONTACTO -->
+  <section id="contacto" class="section">
+    <h2 class="section-title">📞 Contáctanos</h2>
+    <div class="contact-wrapper">
+      <div class="form-container">
+        <h3>Escríbenos y te responderemos rápido</h3>
+        <form id="contactForm">
+          <div class="form-group"><input type="text" id="contactName" placeholder="Nombre completo" required></div>
+          <div class="form-group"><input type="email" id="contactEmail" placeholder="Correo electrónico" required></div>
+          <div class="form-group"><input type="tel" id="contactPhone" placeholder="Teléfono"></div>
+          <div class="form-group"><textarea rows="3" id="contactMsg" placeholder="Cuéntanos qué dispositivo necesitas reparar (TV, radio, laptop, etc)..."></textarea></div>
+          <button type="submit" class="btn-primary">Enviar mensaje <i class="fas fa-paper-plane"></i></button>
+          <div id="formFeedback" class="success-msg"></div>
+        </form>
+      </div>
+      <div class="contact-info">
+        <h3><i class="fas fa-phone-alt"></i> Vía directa</h3>
+        <p><i class="fas fa-phone"></i> +591 78118558</p>
+        <p><i class="fab fa-whatsapp"></i> +591 78118558 (WhatsApp)</p>
+        <p><i class="fas fa-envelope"></i> hola@servitec.cl</p>
+        <hr style="margin: 1rem 0;">
+        <p><i class="fas fa-clock"></i> Atención inmediata en línea</p>
+        <p><i class="fas fa-tv"></i> Especialistas en reparación de televisores y equipos de audio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCION UBICACION -->
+  <section id="ubicacion" class="section">
+    <h2 class="section-title">📍 Dónde encontrarnos</h2>
+    <div class="address-card">
+      <i class="fas fa-map-marker-alt" style="font-size: 2rem; color:#2563eb;"></i>
+      <div><strong>ServiTec Central</strong><br> Av. Los Ingenieros 1245, Of. 304, Santiago, Chile.<br> Estacionamiento propio y acceso por metro Línea 2.</div>
+    </div>
+    <div class="map-placeholder">
+      <i class="fas fa-map" style="font-size: 3rem; color:#64748b;"></i>
+      <p>📍 Mapa interactivo — Calle Los Ingenieros 1245, a pasos del metro Los Héroes.</p>
+      <div style="background:#cbd5e1; height: 200px; border-radius: 24px; display: flex; align-items:center; justify-content:center; margin-top: 12px;">
+        <span style="background:white; padding:0.5rem 1rem; border-radius:40px;">🗺️ [Vista previa de Google Maps]</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCION RESERVAS (CITAS) -->
+  <section id="reservas" class="section">
+    <h2 class="section-title">📅 Reserva tu cita</h2>
+    <div class="booking-card">
+      <h3>Agenda una revisión sin compromiso</h3>
+      <p>Completa el formulario y nos comunicaremos para confirmar tu horario. Reparamos desde televisores hasta equipos de radio antiguos.</p>
+      <form id="bookingForm">
+        <div class="form-row">
+          <div class="form-group"><input type="text" id="bookingName" placeholder="Nombre completo" required></div>
+          <div class="form-group"><input type="email" id="bookingEmail" placeholder="Correo electrónico" required></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><input type="tel" id="bookingPhone" placeholder="Teléfono" required></div>
+          <div class="form-group"><input type="date" id="bookingDate" required></div>
+        </div>
+        <div class="form-group">
+          <select id="bookingService" required>
+            <option value="">Selecciona el servicio principal</option>
+            <option>Reparación de Televisor (LCD/LED/OLED)</option>
+            <option>Reparación de Laptop / PC</option>
+            <option>Reparación de Equipo de Audio / Radio</option>
+            <option>Reparación de Consola de Videojuegos</option>
+            <option>Reparación de Tableta / iPad</option>
+            <option>Diagnóstico general / otro dispositivo</option>
+          </select>
+        </div>
+        <div class="form-group"><textarea rows="2" id="bookingComments" placeholder="Detalles adicionales: marca, modelo, falla específica (por ejemplo: TV no enciende, radio sin sonido)"></textarea></div>
+        <button type="submit" class="btn-primary">Solicitar reserva <i class="fas fa-calendar-check"></i></button>
+        <div id="bookingFeedback" class="success-msg"></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 ServiTec - Reparación electrónica profesional. Todos los derechos reservados.</p>
+  <p><i class="fas fa-shield-alt"></i> Garantía en todas las reparaciones | Diagnóstico avanzado | Especialistas en TV, Audio y más</p>
+</footer>
+
+<script>
+  // -------------------- MENU RESPONSIVE + NAVEGACION SECCIONES --------------------
+  const sections = ['inicio', 'informacion', 'contacto', 'ubicacion', 'reservas'];
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sectionsElements = {
+    inicio: document.getElementById('inicio'),
+    informacion: document.getElementById('informacion'),
+    contacto: document.getElementById('contacto'),
+    ubicacion: document.getElementById('ubicacion'),
+    reservas: document.getElementById('reservas')
+  };
+
+  function activateSection(sectionId) {
+    for (let sec of sections) {
+      if (sectionsElements[sec]) sectionsElements[sec].classList.remove('active-section');
+    }
+    if (sectionsElements[sectionId]) sectionsElements[sectionId].classList.add('active-section');
+    navLinks.forEach(link => {
+      const linkSection = link.getAttribute('data-section');
+      if (linkSection === sectionId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+    localStorage.setItem('activeSection', sectionId);
+    const navList = document.getElementById('nav-list');
+    if (navList.classList.contains('show')) navList.classList.remove('show');
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const sectionId = link.getAttribute('data-section');
+      if (sectionId && sectionsElements[sectionId]) {
+        activateSection(sectionId);
+      }
+    });
+  });
+
+  const btnResInicio = document.getElementById('btnReservarDesdeInicio');
+  if (btnResInicio) {
+    btnResInicio.addEventListener('click', () => {
+      activateSection('reservas');
+      document.getElementById('reservas').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  const menuToggle = document.getElementById('mobile-menu');
+  const navList = document.getElementById('nav-list');
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+      navList.classList.toggle('show');
+    });
+  }
+
+  // ---- FORMULARIO DE CONTACTO ----
+  const contactForm = document.getElementById('contactForm');
+  const formFeedback = document.getElementById('formFeedback');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('contactName')?.value.trim();
+      const email = document.getElementById('contactEmail')?.value.trim();
+      if (!name || !email) {
+        formFeedback.innerHTML = '⚠️ Por favor completa nombre y correo.';
+        formFeedback.style.color = '#dc2626';
+        setTimeout(() => formFeedback.innerHTML = '', 3000);
+        return;
+      }
+      formFeedback.innerHTML = '✅ Mensaje enviado, en breve un asesor te contactará para revisar tu equipo (TV, audio, etc).';
+      formFeedback.style.color = '#16a34a';
+      contactForm.reset();
+      setTimeout(() => formFeedback.innerHTML = '', 4000);
+    });
+  }
+
+  // ---- RESERVAS (CITAS) ----
+  const bookingForm = document.getElementById('bookingForm');
+  const bookingFeedback = document.getElementById('bookingFeedback');
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const bName = document.getElementById('bookingName')?.value.trim();
+      const bEmail = document.getElementById('bookingEmail')?.value.trim();
+      const bPhone = document.getElementById('bookingPhone')?.value.trim();
+      const bDate = document.getElementById('bookingDate')?.value;
+      const bService = document.getElementById('bookingService')?.value;
+
+      if (!bName || !bEmail || !bPhone || !bDate || !bService) {
+        bookingFeedback.innerHTML = '❌ Todos los campos con * son obligatorios.';
+        bookingFeedback.style.color = '#dc2626';
+        setTimeout(() => bookingFeedback.innerHTML = '', 3000);
+        return;
+      }
+      const today = new Date().toISOString().split('T')[0];
+      if (bDate < today) {
+        bookingFeedback.innerHTML = '📅 La fecha debe ser hoy o posterior.';
+        bookingFeedback.style.color = '#dc2626';
+        setTimeout(() => bookingFeedback.innerHTML = '', 3000);
+        return;
+      }
+      bookingFeedback.innerHTML = `🎉 ¡Reserva solicitada, ${bName}! Te confirmaremos por ${bEmail} o ${bPhone} para el día ${bDate} (Servicio: ${bService}). ¡Gracias por confiar en ServiTec, expertos en electrónicos!`;
+      bookingFeedback.style.color = '#16a34a';
+      bookingForm.reset();
+      setTimeout(() => bookingFeedback.innerHTML = '', 5000);
+    });
+  }
+
+  const savedSection = localStorage.getItem('activeSection');
+  if (savedSection && sectionsElements[savedSection]) {
+    activateSection(savedSection);
+  } else {
+    activateSection('inicio');
+  }
+
+  window.addEventListener('load', () => {
+    const hash = window.location.hash.substring(1);
+    if (hash && sections.includes(hash) && sectionsElements[hash]) {
+      activateSection(hash);
+    }
+  });
+</script>
+</body>
+</html>
